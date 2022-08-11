@@ -26,7 +26,7 @@
     <h3 class="jumbotron">Laravel Multiple File Upload</h3>
 <form method="post" action="{{url('form_add_images')}}" enctype="multipart/form-data">
   {{csrf_field()}}
-
+  <input type="hidden" name="product_id" value="{{$id}}">
         <div class="input-group control-group increment" >
           <input type="file" name="filename[]" class="form-control">
           <div class="input-group-btn">

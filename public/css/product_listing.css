@@ -1,0 +1,14 @@
+.product_listing{
+  padding: 50px;
+  box-shadow: 2px 2px 10px 2px;
+  margin: 10px;
+}
+.thumbnail{
+  float: left;
+  padding: 10px;
+}
+.btn-admin{
+  float: right;
+  font-size: 18px;
+  margin: 2px;
+}

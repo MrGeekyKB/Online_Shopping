@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('multiple_images', function (Blueprint $table) {
             $table->id();
             $table->string('filename');
+            $table->string('product_id');
             $table->timestamps();
         });
     }

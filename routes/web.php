@@ -38,5 +38,9 @@ Route::get('/dashboard', function () {
 Route::resource('products', ProductsController::class);
 Route::post('form_add_images',  [ProductsController::class, 'store_images']);
 Route::get('step2',  [ProductsController::class, 'index_step2']);
+Route::get('step3',  [ProductsController::class, 'index_step3']);
+Route::post('publish',  [ProductsController::class, 'publish']);
+
+Route::get('my_products',  [ProductsController::class, 'index_my_products']);
 
 require __DIR__.'/auth.php';

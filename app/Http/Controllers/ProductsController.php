@@ -20,7 +20,22 @@ class ProductsController extends Controller
 
     public function index_step2()
     {
-        return view('admin.add_step2');
+      $id=Products::orderBy('id', 'DESC')->pluck('id')->first();
+        return view('admin.add_step2', compact('id'));
+    }
+
+    public function index_step3()
+    {
+      $product_id=session('product_id');
+      $product=Products::where('id', $product_id)->get();
+      $images=MultipleImages::where('product_id', $product_id)->pluck('filename')->first();
+        return view('admin.add_step3', compact('product','images'));
+    }
+
+    public function index_my_products()
+    {
+      $products=Products::all();
+        return view('admin.my_products', compact('products'));
     }
 
     /**
@@ -61,7 +76,9 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-        //
+      $product=Products::where('id', $id)->get();
+      $images=MultipleImages::where('product_id', $id)->pluck('filename')->first();
+        return view('product', compact('product','images'));
     }
 
     /**
@@ -101,7 +118,7 @@ class ProductsController extends Controller
     public function store_images(Request $request)
     {
       $this->validate($request, [
-
+              'product_id' => 'required',
               'filename' => 'required',
               'filename.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
@@ -118,12 +135,28 @@ class ProductsController extends Controller
           }
        }
 
+       $product_id=$request->input('product_id');
        $form= new MultipleImages();
+       $form->product_id=$request->input('product_id');
        $form->filename=json_encode($data);
 
 
       $form->save();
 
-      return back()->with('success', 'Your images has been successfully');
+      return redirect('step3')->with('success', 'Your images has been successfully Uploaded')->with('product_id', $product_id);
+    }
+
+    public function publish(Request $request)
+    {
+        $request->validate([
+          'product_id'=>'required',
+          'publish'=>'required',
+        ]);
+        $id=$request->input('product_id');
+        $Product=Products::findOrFail($id);
+        $Product->publish=$request->input('publish');
+
+        $Product->save();
+        return redirect('/admin')->with('success', 'Your Product has been successfully Published');
     }
 }
