@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" type="text/css" href="{{ url('css/product_listing.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url('css/fafa_icons.css') }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 

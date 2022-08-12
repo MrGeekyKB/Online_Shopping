@@ -1,0 +1,20 @@
+.form{
+  width: 500px;
+  height: auto;
+  padding: 25px;
+  margin: auto;
+  background-color: rgb(118, 241, 196)
+}
+.next{
+  padding: 10px;
+  background-color: rgb(79, 87, 201);
+  color: rgb(255, 255, 255);
+  font-size: 25px;
+  border: none;
+  margin: auto;
+  margin-top: 5px;
+}
+input{
+  padding: 10px;
+  width: 90%;
+}

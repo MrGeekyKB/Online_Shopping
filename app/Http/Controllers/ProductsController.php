@@ -75,6 +75,7 @@ class ProductsController extends Controller
         $Product=new Products();
         $Product->name=$request->input('name');
         $Product->price=$request->input('price');
+        $Product->publish=0;
 
         $Product->save();
         return redirect('step2');

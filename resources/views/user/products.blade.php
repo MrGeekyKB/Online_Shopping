@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="">
+    <div class="products">
       @if (count($products)>0)
         @foreach ($products as $product)
         <div class="product_listing">
@@ -17,11 +17,17 @@
           $url="/images/$images_p3[0]";
           $image=url($url);
           @endphp
-          <img src="{{$image}}" alt="" height="100" width="100" class="thumbnail">
-          <h2>{{$product->name}}</h2>
-          <h3>₹ {{$product->price}}</h3>
+          <img src="{{$image}}" alt="" class="thumbnail">
+          <h2 class="pname">{{$product->name}}</h2>
+          <h3 class="pprice">₹ {{$product->price}}</h3>
           <a href="{{ route('displayProduct', ['id' => $product['id']])}}" class="btn-admin">View</a>
-          <a href="{{ route('products.edit', ['product' => $product['id']])}}" class="btn-admin">Add to Cart</a>
+          <form class="" action="{{Route('add_to_cart')}}" method="post">
+            @csrf
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+            <input type="hidden" name="product_id" value="{{$product['id']}}">
+            <input type="hidden" name="status" value="1">
+            <input type="submit" name="buy" value="Add to Cart" class="btn-admin">
+          </form>
         </div>
         @endforeach
       @else

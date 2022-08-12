@@ -21,14 +21,14 @@
           @php
           $product_data=\App\Models\Products::where('id', $item->product_id)->first();
           @endphp
-          <h2>{{$product_data->name}}</h2>
-          <h3>₹ {{$product_data->price}}</h3>
+          <h2 class="pname">{{$product_data->name}}</h2>
+          <h3 class="pprice">₹ {{$product_data->price}}</h3>
           <a href="{{ route('removeProduct', ['id' => $product_data['id']])}}" class="btn-admin">Remove</a>
         </div>
         @endforeach
       @else
           <h2>No posts found</h2>
       @endif
-      <a href="{{Route('checkout')}}" class="btn-admin">Checkout</a>
+      <a href="{{Route('checkout')}}" class="btn-checkout">Checkout</a>
     </div>
 </x-app-layout>

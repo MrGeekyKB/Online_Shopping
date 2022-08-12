@@ -5,14 +5,10 @@
         </h2>
     </x-slot>
 
-    <h4>Product Details</h4>
       @foreach ($product as $product)
-      <label for="">Name</label><br>
-      {{$product['name']}}<br>
-      <label for="">Price</label><br>
-      ₹ {{$product['price']}}<br>
+      <p class="pname">{{$product['name']}}<br></p>
+      <p class="pprice">₹ {{$product['price']}}</p>
       @endforeach
-    <h2>Images</h2>
     @php
       $images_p1=str_replace( array('[',']') , ''  , $images);
       $images_p2=str_replace( array('"') , ''  , $images_p1);
@@ -28,12 +24,17 @@
     }
     @endphp
 
+    <div class="btn_submit">
+
+
     <form class="" action="{{Route('add_to_cart')}}" method="post">
       @csrf
       <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
       <input type="hidden" name="product_id" value="{{$product['id']}}">
       <input type="hidden" name="status" value="1">
-      <input type="submit" name="buy" value="Add to Cart">
+      <input type="submit" name="buy" value="Add to Cart" class="btn_cart">
     </form>
+
+    </div>
 
 </x-app-layout>

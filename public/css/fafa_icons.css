@@ -1,0 +1,12 @@
+.fa-search{
+  color: rgb(0, 191, 255);
+  font-size: 150px;
+}
+.fa-cart-arrow-down{
+  color: rgb(0, 255, 152);
+}
+
+.quick_bar{
+  margin: auto;
+  width: 500px
+}

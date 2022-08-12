@@ -14,7 +14,9 @@
             </div>
         </div>
     </div>
+<div class="quick_bar">
+  <a href="{{url('all_products')}}"><i class="fa fa-search" aria-hidden="true"></i>Explore products</a>
+  <a href="{{ route('displayCart', ['id' => Auth::user()->id])}}"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="font-size: 150px;"></i>Cart</a>
+</div>
 
-<a href="{{url('all_products')}}"><i class="fa fa-search" aria-hidden="true"></i></a>
-<a href="{{ route('displayCart', ['id' => Auth::user()->id])}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
 </x-app-layout>
