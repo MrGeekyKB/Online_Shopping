@@ -1,4 +1,9 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+  @if(session('success'))
+  <div class="alert alert-success">
+    {{ session('success') }}
+  </div>
+  @endif
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -23,6 +28,10 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                          @php
+                          $cart_items=\App\Models\Cart::where('user_id', Auth::user()->id)->where('status', 1)->get();
+                          @endphp
+                          <a href="{{ route('displayCart', ['id' => Auth::user()->id])}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> {{$cart_count=count($cart_items)}}</a> &nbsp
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">

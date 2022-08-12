@@ -35,6 +35,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+//admin
 Route::resource('products', ProductsController::class);
 Route::post('form_add_images',  [ProductsController::class, 'store_images']);
 Route::get('step2',  [ProductsController::class, 'index_step2']);
@@ -42,5 +43,14 @@ Route::get('step3',  [ProductsController::class, 'index_step3']);
 Route::post('publish',  [ProductsController::class, 'publish']);
 
 Route::get('my_products',  [ProductsController::class, 'index_my_products']);
+
+
+//user
+Route::get('all_products',  [ProductsController::class, 'index_user_all_products']);
+Route::get('/product/{id}', [ProductsController::class, 'show_user'])->name('displayProduct');
+Route::post('add_to_cart',  [ProductsController::class, 'store_to_cart'])->name('add_to_cart');
+Route::get('/cart/{id}', [ProductsController::class, 'show_user_cart'])->name('displayCart');
+Route::get('/cart/remove/{id}', [ProductsController::class, 'cart_item_remove'])->name('removeProduct');
+Route::get('checkout', [ProductsController::class, 'checkout'])->name('checkout');
 
 require __DIR__.'/auth.php';

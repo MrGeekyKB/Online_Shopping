@@ -14,4 +14,7 @@
             </div>
         </div>
     </div>
+
+<a href="{{url('all_products')}}"><i class="fa fa-search" aria-hidden="true"></i></a>
+<a href="{{ route('displayCart', ['id' => Auth::user()->id])}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
 </x-app-layout>

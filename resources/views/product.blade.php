@@ -1,12 +1,10 @@
 <h4>Product Details</h4>
-<form class="" action="index.html" method="post">
   @foreach ($product as $product)
   <label for="">Name</label><br>
   {{$product['name']}}<br>
   <label for="">Price</label><br>
   ₹ {{$product['price']}}<br>
   @endforeach
-
 <h2>Images</h2>
 @php
   $images_p1=str_replace( array('[',']') , ''  , $images);
@@ -24,7 +22,3 @@
 @endphp
 
 </form>
-
-  </div>
-</body>
-</html>

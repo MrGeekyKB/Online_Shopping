@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\MultipleImages;
+use App\Models\Cart;
 
 class ProductsController extends Controller
 {
@@ -38,6 +39,17 @@ class ProductsController extends Controller
         return view('admin.my_products', compact('products'));
     }
 
+    public function index_user_all_products()
+    {
+      $products=Products::all();
+        return view('user.products', compact('products'));
+    }
+    public function checkout()
+    {
+
+        return view('dashboard')->with('success', 'Order Placed Successfully');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -68,6 +80,22 @@ class ProductsController extends Controller
         return redirect('step2');
     }
 
+    public function store_to_cart(Request $request)
+    {
+        $request->validate([
+          'user_id'=>'required',
+          'product_id'=>'required',
+          'status'=>'required',
+        ]);
+        $Cart=new Cart();
+        $Cart->user_id=$request->input('user_id');
+        $Cart->product_id=$request->input('product_id');
+        $Cart->status=$request->input('status');
+
+        $Cart->save();
+        return back()->with('success', 'Item successfully Added to Cart');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -79,6 +107,19 @@ class ProductsController extends Controller
       $product=Products::where('id', $id)->get();
       $images=MultipleImages::where('product_id', $id)->pluck('filename')->first();
         return view('product', compact('product','images'));
+    }
+
+    public function show_user($id)
+    {
+      $product=Products::where('id', $id)->get();
+      $images=MultipleImages::where('product_id', $id)->pluck('filename')->first();
+        return view('user.product_details', compact('product','images'));
+    }
+
+    public function show_user_cart($id)
+    {
+      $cart_items=Cart::where('user_id', $id)->where('status', 1)->get();
+        return view('user.cart', compact('cart_items'));
     }
 
     /**
@@ -158,5 +199,14 @@ class ProductsController extends Controller
 
         $Product->save();
         return redirect('/admin')->with('success', 'Your Product has been successfully Published');
+    }
+
+    public function cart_item_remove($id)
+    {
+        $Remove_item=Cart::findOrFail($id);
+        $Remove_item->status=0;
+
+        $Remove_item->save();
+        return back()->with('success', 'Item Removed from Cart');
     }
 }
