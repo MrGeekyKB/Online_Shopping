@@ -30,7 +30,7 @@
       <a href="{{url('my_products')}}">My Products</a>
 
       <div class="Logout" style=" float: right ">
-        <a href="">Logout</a>
+        <a href="{{url('/')}}">Logout</a>
       </div>
     </div>
     <div class="">
